@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazigh.be — Coming Soon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap');
+
+  :root{
+    --bg: #15120e;
+    --bg-alt: #1c1712;
+    --card: #1f1a14;
+    --line: #34291d;
+    --sand: #ece3d3;
+    --sand-dim: #b7ab97;
+    --gold: #c99a3f;
+    --teal: #3c7c74;
+    --clay: #b8492f;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,154,63,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(60,124,116,0.10), transparent 60%),
+      var(--bg);
+    color:var(--sand);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  ::selection{ background:var(--gold); color:#1a1409; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .yaz-mark{ animation: yazIn 1.4s cubic-bezier(.2,.8,.2,1) both; }
+    .fade{ animation: fadeUp .9s cubic-bezier(.2,.8,.2,1) both; }
+  }
+  @keyframes yazIn{ from{ opacity:0; transform:scale(.85) rotate(-6deg);} to{ opacity:1; transform:scale(1) rotate(0);} }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center;
+    max-width:1040px; margin:0 auto; padding:28px 24px 0;
+  }
+  .brand{
+    font-family:'Cormorant Garamond', serif; font-size:1.3rem; letter-spacing:.02em; color:var(--sand);
+    display:flex; align-items:center; gap:9px;
+  }
+  .brand svg{ width:20px; height:20px; }
+
+  .langs{ display:flex; gap:2px; background:var(--bg-alt); border:1px solid var(--line); border-radius:999px; padding:3px; }
+  .langs button{
+    font-family:'Jost', sans-serif; font-size:.8rem; font-weight:500; letter-spacing:.02em;
+    color:var(--sand-dim); background:none; border:none; border-radius:999px;
+    padding:7px 14px; cursor:pointer; transition:color .25s ease, background .25s ease;
+  }
+  .langs button.active{ color:#1a1409; background:var(--gold); }
+  .langs button:not(.active):hover{ color:var(--sand); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:720px; margin:0 auto; padding:76px 24px 56px;
+    text-align:center;
+  }
+  .yaz-mark{
+    width:64px; height:64px; margin:0 auto 30px;
+  }
+  .yaz-mark svg{ width:100%; height:100%; }
+
+  .hero h1{
+    font-family:'Cormorant Garamond', serif; font-weight:600;
+    font-size:clamp(2.6rem, 6vw, 3.8rem);
+    line-height:1.05; margin:0 0 20px; color:var(--sand);
+  }
+  .hero p.tagline{
+    font-size:1.15rem; font-weight:400; color:var(--sand-dim);
+    line-height:1.6; max-width:520px; margin:0 auto 34px;
+  }
+
+  .band{
+    display:inline-flex; height:3px; width:120px; border-radius:2px; overflow:hidden; margin-bottom:34px;
+  }
+  .band span{ flex:1; }
+  .band .b1{ background:var(--teal); }
+  .band .b2{ background:#4a8f4f; }
+  .band .b3{ background:var(--gold); }
+
+  .status{
+    display:inline-flex; align-items:center; gap:9px;
+    font-size:.82rem; letter-spacing:.02em; color:var(--sand-dim);
+    border:1px solid var(--line); padding:9px 18px; border-radius:999px;
+  }
+  .status .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--gold);
+    box-shadow:0 0 0 0 rgba(201,154,63,.6); animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(201,154,63,.45); }
+    70%{ box-shadow:0 0 0 9px rgba(201,154,63,0); }
+    100%{ box-shadow:0 0 0 0 rgba(201,154,63,0); }
+  }
+
+  /* ---------- section headings ---------- */
+  h2.section-title{
+    font-family:'Cormorant Garamond', serif; font-weight:500; font-style:italic;
+    text-align:center; font-size:1.5rem; color:var(--sand); margin:0 0 48px;
+  }
+
+  /* ---------- timeline ---------- */
+  .timeline-section{ max-width:840px; margin:0 auto; padding:20px 24px 70px; }
+
+  .timeline{ position:relative; }
+  .timeline::before{
+    content:''; position:absolute; left:23px; top:6px; bottom:6px; width:1px;
+    background:linear-gradient(var(--line), var(--line)); opacity:.9;
+  }
+  @media (min-width:700px){
+    .timeline::before{ left:50%; transform:translateX(-.5px); }
+  }
+
+  .item{
+    position:relative; padding-left:60px; margin-bottom:38px;
+  }
+  .item:last-child{ margin-bottom:0; }
+  .item .node{
+    position:absolute; left:0; top:2px; width:47px; height:47px; border-radius:50%;
+    background:var(--card); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.15rem; color:var(--gold);
+  }
+  .item .era{ font-size:.72rem; letter-spacing:.04em; color:var(--sand-dim); margin-bottom:4px; }
+  .item h3{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.35rem; margin:0 0 6px; color:var(--sand); }
+  .item p{ font-size:.94rem; line-height:1.55; color:var(--sand-dim); margin:0; max-width:480px; }
+
+  @media (min-width:700px){
+    .item{ padding-left:0; width:calc(50% - 34px); }
+    .item .node{ left:auto; top:0; }
+    .item:nth-child(odd){ margin-left:0; text-align:right; }
+    .item:nth-child(odd) .node{ right:-58px; }
+    .item:nth-child(even){ margin-left:calc(50% + 34px); }
+    .item:nth-child(even) .node{ left:-58px; }
+    .item:nth-child(odd) p{ margin-left:auto; }
+  }
+
+  /* ---------- figures grid ---------- */
+  .figures-section{
+    max-width:1040px; margin:0 auto; padding:10px 24px 90px;
+    border-top:1px solid var(--line); padding-top:64px;
+  }
+  .figures-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+  }
+  .figure-card{
+    background:var(--bg); padding:26px 22px; display:flex; flex-direction:column; gap:10px;
+  }
+  .figure-card .badge{
+    width:38px; height:38px; border-radius:50%; background:var(--card); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1rem; color:var(--teal);
+  }
+  .figure-card .field{ font-size:.68rem; letter-spacing:.03em; color:var(--gold); }
+  .figure-card h3{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.2rem; margin:0; color:var(--sand); }
+  .figure-card .years{ font-size:.74rem; color:var(--sand-dim); margin-top:-8px; }
+  .figure-card p{ font-size:.88rem; line-height:1.55; color:var(--sand-dim); margin:2px 0 0; }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:26px 24px 40px; text-align:center;
+  }
+  footer p{ font-size:.78rem; color:var(--sand-dim); margin:0 0 6px; letter-spacing:.01em; }
+  footer .note{ font-size:.72rem; color:#7a6f5e; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="3"/><line x1="12" y1="10" x2="12" y2="20"/><line x1="12" y1="20" x2="6" y2="14"/><line x1="12" y1="20" x2="18" y2="14"/></svg>
+    Amazigh.be
+  </div>
+  <div class="langs" id="langs">
+    <button data-lang="en" class="active">EN</button>
+    <button data-lang="fr">FR</button>
+    <button data-lang="nl">NL</button>
+    <button data-lang="zgh">ⵣ</button>
+  </div>
+</div>
+
+<section class="hero fade">
+  <div class="yaz-mark">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#c99a3f" stroke-width="1.4">
+      <circle cx="12" cy="6.2" r="2.6"/>
+      <line x1="12" y1="8.8" x2="12" y2="19.4"/>
+      <line x1="12" y1="19.4" x2="5.2" y2="12.6"/>
+      <line x1="12" y1="19.4" x2="18.8" y2="12.6"/>
+    </svg>
+  </div>
+  <h1 data-key="title">A story spanning three millennia</h1>
+  <p class="tagline" data-key="tagline">Amazigh.be is being built — a home for the history and civilisation of the Amazigh people, from the ancient Maghreb to today.</p>
+  <div class="band"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+  <br>
+  <div class="status"><span class="dot"></span><span data-key="status">Under construction — launching soon</span></div>
+</section>
+
+<section class="timeline-section fade">
+  <h2 class="section-title" data-key="timelineTitle">Kingdoms across the ages</h2>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<section class="figures-section fade">
+  <h2 class="section-title" data-key="figuresTitle">Amazigh personalities</h2>
+  <div class="figures-grid" id="figures"></div>
+</section>
+
+<footer>
+  <p data-key="footerLine">Amazigh.be — English, Français, Nederlands, Tamaziɣt (ⵣ)</p>
+  <p class="note" data-key="footerNote">Tamazight text is a first draft and should be reviewed by a native speaker before launch.</p>
+</footer>
+
+<script>
+const content = {
+  en: {
+    title: "A story spanning three millennia",
+    tagline: "Amazigh.be is being built — a home for the history and civilisation of the Amazigh people, from the ancient Maghreb to today.",
+    status: "Under construction — launching soon",
+    timelineTitle: "Kingdoms across the ages",
+    figuresTitle: "Amazigh personalities",
+    footerLine: "Amazigh.be — English, Français, Nederlands, Tamaziɣt (ⵣ)",
+    footerNote: "Tamazight text is a first draft and should be reviewed by a native speaker before launch.",
+    people: [
+      { era:"c. 943 – 922 BC", name:"King Sheshonq", desc:"Libyan-Amazigh founder of Egypt's 22nd dynasty, who ruled as pharaoh over the Nile valley." },
+      { era:"d. 202 BC", name:"King Syphax", desc:"Ruler of the Masaesyli of western Numidia, a major power broker in the wars between Rome and Carthage." },
+      { era:"238 – 148 BC", name:"King Massinissa", desc:"First king to unite Numidia, and a builder of one of North Africa's earliest centralised states." },
+      { era:"160 – 104 BC", name:"King Jugurtha", desc:"Grandson of Massinissa, remembered for his long resistance against Roman expansion in Numidia." },
+      { era:"1st c. BC", name:"King Bocchus", desc:"Ruler of Mauretania who navigated Rome's rise while keeping his own kingdom's independence." },
+      { era:"25 BC – 23 AD", name:"Juba II", desc:"Scholar-king of Numidia and Mauretania, known for his writings on geography, history and nature." },
+      { era:"d. 686", name:"King Aksil", desc:"Amazigh king, also known as Kusayla, who led the resistance against the Umayyad advance into the Maghreb." },
+      { era:"d. c. 703", name:"Queen Tihya", desc:"Amazigh queen and military leader who carried on the resistance after Aksil, becoming one of the era's most remembered figures." }
+    ],
+    figures: [
+      { field:"Theology", name:"Saint Augustine", years:"354 – 430", desc:"Berber-born bishop of Hippo, one of the most influential thinkers in Christian history." },
+      { field:"Papacy", name:"Pope Saint Victor I", years:"d. 199", desc:"First African-born pope, credited with introducing Latin into the Church's liturgy." },
+      { field:"Papacy", name:"Pope Saint Miltiades", years:"d. 314", desc:"African-born pope whose papacy saw Christianity gain legal standing in the Roman Empire." },
+      { field:"Papacy", name:"Pope Saint Gelasius I", years:"d. 496", desc:"Berber-born pope known for his writings on the relationship between religious and political authority." },
+      { field:"Literature", name:"Apuleius", years:"c. 124 – c. 170", desc:"Numidian-born writer, author of the Golden Ass, one of the earliest novels to survive in full." },
+      { field:"Scholarship", name:"Mokhtar Soussi", years:"1900 – 1963", desc:"Moroccan Amazigh scholar and historian, chronicler of the people and culture of the Souss region." },
+      { field:"Football", name:"Zinedine Zidane", years:"1972 –", desc:"World Cup winner and celebrated coach, one of the best-known faces of the Amazigh diaspora." },
+      { field:"Football", name:"Karim Benzema", years:"1987 –", desc:"Ballon d'Or-winning striker and one of the most decorated players of his generation." },
+      { field:"Football", name:"Mustapha Hadji", years:"1971 –", desc:"Moroccan playmaker named African Footballer of the Year in 1998." },
+      { field:"Football", name:"Brahim Díaz", years:"1999 –", desc:"Spanish-Moroccan winger playing for Real Madrid and the Morocco national team." },
+      { field:"Football", name:"Lamine Yamal", years:"2007 –", desc:"Barcelona and Spain winger, regarded as one of the brightest young talents in the game." }
+    ]
+  },
+  fr: {
+    title: "Une histoire de trois millénaires",
+    tagline: "Amazigh.be est en construction — un espace dédié à l'histoire et à la civilisation du peuple amazigh, du Maghreb antique à aujourd'hui.",
+    status: "En construction — ouverture prochaine",
+    timelineTitle: "Royaumes à travers les âges",
+    figuresTitle: "Personnalités amazighes",
+    footerLine: "Amazigh.be — English, Français, Nederlands, Tamaziɣt (ⵣ)",
+    footerNote: "Le texte en tamazight est une première ébauche et devrait être relu par un locuteur natif avant la mise en ligne.",
+    people: [
+      { era:"env. 943 – 922 av. J.-C.", name:"Le roi Sheshonq", desc:"Fondateur libyo-amazigh de la 22e dynastie d'Égypte, qui régna comme pharaon sur la vallée du Nil." },
+      { era:"m. 202 av. J.-C.", name:"Le roi Syphax", desc:"Souverain des Masaesyles de Numidie occidentale, acteur majeur des guerres entre Rome et Carthage." },
+      { era:"238 – 148 av. J.-C.", name:"Le roi Massinissa", desc:"Premier roi à unifier la Numidie, bâtisseur de l'un des premiers États centralisés d'Afrique du Nord." },
+      { era:"160 – 104 av. J.-C.", name:"Le roi Jugurtha", desc:"Petit-fils de Massinissa, resté célèbre pour sa longue résistance face à l'expansion romaine en Numidie." },
+      { era:"1er s. av. J.-C.", name:"Le roi Bocchus", desc:"Souverain de Maurétanie qui a composé avec la montée de Rome tout en préservant l'indépendance de son royaume." },
+      { era:"25 av. J.-C. – 23", name:"Juba II", desc:"Roi savant de Numidie et de Maurétanie, connu pour ses écrits sur la géographie, l'histoire et la nature." },
+      { era:"m. 686", name:"Le roi Aksil", desc:"Roi amazigh, aussi appelé Kusayla, qui a mené la résistance face à l'avancée omeyyade au Maghreb." },
+      { era:"m. env. 703", name:"La reine Tihya", desc:"Reine et cheffe militaire amazighe qui a poursuivi la résistance après Aksil, restée l'une des grandes figures de son époque." }
+    ],
+    figures: [
+      { field:"Théologie", name:"Saint Augustin", years:"354 – 430", desc:"Évêque d'Hippone d'origine berbère, l'un des penseurs les plus influents de l'histoire chrétienne." },
+      { field:"Papauté", name:"Le pape saint Victor Ier", years:"m. 199", desc:"Premier pape d'origine africaine, à qui l'on attribue l'introduction du latin dans la liturgie de l'Église." },
+      { field:"Papauté", name:"Le pape saint Miltiade", years:"m. 314", desc:"Pape d'origine africaine sous le pontificat duquel le christianisme obtint une reconnaissance légale à Rome." },
+      { field:"Papauté", name:"Le pape saint Gélase Ier", years:"m. 496", desc:"Pape d'origine berbère connu pour ses écrits sur les rapports entre autorité religieuse et politique." },
+      { field:"Littérature", name:"Apulée", years:"env. 124 – env. 170", desc:"Écrivain d'origine numide, auteur des Métamorphoses (l'Âne d'or), l'un des tout premiers romans conservés en entier." },
+      { field:"Savoir", name:"Mokhtar Soussi", years:"1900 – 1963", desc:"Savant et historien amazigh marocain, chroniqueur des peuples et de la culture du Souss." },
+      { field:"Football", name:"Zinedine Zidane", years:"1972 –", desc:"Champion du monde et entraîneur reconnu, l'un des visages les plus connus de la diaspora amazighe." },
+      { field:"Football", name:"Karim Benzema", years:"1987 –", desc:"Attaquant Ballon d'Or, l'un des joueurs les plus titrés de sa génération." },
+      { field:"Football", name:"Mustapha Hadji", years:"1971 –", desc:"Meneur de jeu marocain, élu meilleur footballeur africain en 1998." },
+      { field:"Football", name:"Brahim Díaz", years:"1999 –", desc:"Ailier hispano-marocain évoluant au Real Madrid et en sélection du Maroc." },
+      { field:"Football", name:"Lamine Yamal", years:"2007 –", desc:"Ailier du FC Barcelone et de l'Espagne, considéré comme l'un des plus grands talents de sa génération." }
+    ]
+  },
+  nl: {
+    title: "Een verhaal van drie millennia",
+    tagline: "Amazigh.be wordt gebouwd — een plek voor de geschiedenis en beschaving van het Amazigh-volk, van de oude Maghreb tot vandaag.",
+    status: "In opbouw — binnenkort online",
+    timelineTitle: "Koninkrijken doorheen de eeuwen",
+    figuresTitle: "Amazigh-persoonlijkheden",
+    footerLine: "Amazigh.be — English, Français, Nederlands, Tamaziɣt (ⵣ)",
+    footerNote: "De Tamazight-tekst is een eerste ontwerp en moet vóór lancering nagelezen worden door een moedertaalspreker.",
+    people: [
+      { era:"ca. 943 – 922 v.Chr.", name:"Koning Sheshonq", desc:"Libysch-Amazigh stichter van Egypte's 22e dynastie, die als farao over de Nijlvallei regeerde." },
+      { era:"† 202 v.Chr.", name:"Koning Syphax", desc:"Heerser van de Masaesyli in West-Numidië, een sleutelfiguur in de oorlogen tussen Rome en Carthago." },
+      { era:"238 – 148 v.Chr.", name:"Koning Massinissa", desc:"Eerste koning die Numidië verenigde en een van de eerste gecentraliseerde staten van Noord-Afrika opbouwde." },
+      { era:"160 – 104 v.Chr.", name:"Koning Jugurtha", desc:"Kleinzoon van Massinissa, herinnerd om zijn langdurige verzet tegen de Romeinse expansie in Numidië." },
+      { era:"1e eeuw v.Chr.", name:"Koning Bocchus", desc:"Heerser van Mauretanië die de opkomst van Rome navigeerde en toch de onafhankelijkheid van zijn rijk bewaarde." },
+      { era:"25 v.Chr. – 23 n.Chr.", name:"Juba II", desc:"Geleerde koning van Numidië en Mauretanië, bekend om zijn geschriften over aardrijkskunde, geschiedenis en natuur." },
+      { era:"† 686", name:"Koning Aksil", desc:"Amazigh-koning, ook bekend als Kusayla, die het verzet leidde tegen de Umayyadische opmars in de Maghreb." },
+      { era:"† ca. 703", name:"Koningin Tihya", desc:"Amazigh-koningin en legeraanvoerder die het verzet na Aksil voortzette en een van de bekendste figuren van haar tijd werd." }
+    ],
+    figures: [
+      { field:"Theologie", name:"Sint-Augustinus", years:"354 – 430", desc:"Bisschop van Hippo van Berberse afkomst, een van de invloedrijkste denkers in de christelijke geschiedenis." },
+      { field:"Pausdom", name:"Paus Sint-Victor I", years:"† 199", desc:"Eerste paus van Afrikaanse afkomst, aan wie de invoering van het Latijn in de kerkliturgie wordt toegeschreven." },
+      { field:"Pausdom", name:"Paus Sint-Miltiades", years:"† 314", desc:"Paus van Afrikaanse afkomst, tijdens wiens pontificaat het christendom wettelijke erkenning kreeg in Rome." },
+      { field:"Pausdom", name:"Paus Sint-Gelasius I", years:"† 496", desc:"Paus van Berberse afkomst, bekend om zijn geschriften over de verhouding tussen kerkelijk en wereldlijk gezag." },
+      { field:"Literatuur", name:"Apuleius", years:"ca. 124 – ca. 170", desc:"Schrijver uit Numidië, auteur van De Gouden Ezel, een van de eerste romans die volledig bewaard zijn gebleven." },
+      { field:"Geleerdheid", name:"Mokhtar Soussi", years:"1900 – 1963", desc:"Marokkaanse Amazigh-geleerde en historicus, kroniekschrijver van het volk en de cultuur van de Souss-regio." },
+      { field:"Voetbal", name:"Zinedine Zidane", years:"1972 –", desc:"Wereldkampioen en gevierd coach, een van de bekendste gezichten van de Amazigh-diaspora." },
+      { field:"Voetbal", name:"Karim Benzema", years:"1987 –", desc:"Ballon d'Or-winnende spits, een van de meest bekroonde spelers van zijn generatie." },
+      { field:"Voetbal", name:"Mustapha Hadji", years:"1971 –", desc:"Marokkaanse spelmaker, verkozen tot Afrikaans voetballer van het jaar in 1998." },
+      { field:"Voetbal", name:"Brahim Díaz", years:"1999 –", desc:"Spaans-Marokkaanse vleugelspeler bij Real Madrid en het Marokkaanse nationale elftal." },
+      { field:"Voetbal", name:"Lamine Yamal", years:"2007 –", desc:"Vleugelspeler bij Barcelona en Spanje, beschouwd als een van de grootste jonge talenten van het voetbal." }
+    ]
+  },
+  zgh: {
+    title: "Tallalt n krad iyaf n iseggasen",
+    tagline: "Amazigh.be atan itebna — d axxam n umezruy d tmetti n Imazighen, seg Tmazɣa n zik ar ass-a.",
+    status: "Deg lebni — ad d-yeffeɣ qrib",
+    timelineTitle: "Tigelda seg lɣayat",
+    figuresTitle: "Imdanen imazighen",
+    footerLine: "Amazigh.be — English, Français, Nederlands, Tamaziɣt (ⵣ)",
+    footerNote: "Awal s Tmaziɣt d asnifel amezwaru, yessefk ad t-id-yesseɣti yiwen i d-yettmeslayen s Tmaziɣt uqbel ad d-yeffeɣ usmel.",
+    people: [
+      { era:"~943 – 922 uqbel", name:"Agellid Ccacenq", desc:"Amyaru amazigh n tgelda wis 22 n Maser, i gḥekmen amzun d firɛun ɣef wasif n Nil." },
+      { era:"yemmut 202 uqbel", name:"Agellid Sufaks", desc:"Agellid n Imasaysliyen deg umalu n Numidya, yesɛan tamɣunt tameqqrant deg umenɣi gar Ṛuma d Qarṭaj." },
+      { era:"238 – 148 uqbel", name:"Agellid Masinisa", desc:"Agellid amezwaru i gesdukklen Numidya, yebna yiwet seg tgeldiwin tiqerbanin timezwura n Tefriqt n Ugafa." },
+      { era:"160 – 104 uqbel", name:"Agellid Yugurten", desc:"Ajaddi n Masinisa, yettwaḍkiren ɣef umenɣi-ines aɣezfan mgal talast n Ṛuma deg Numidya." },
+      { era:"asgas 100 uqbel", name:"Agellid Bokkus", desc:"Agellid n Muritanya i gesɛan tamɣunt akked Ṛuma, yeṭṭfen tilelli n tgelda-ines." },
+      { era:"25 uqbel – 23", name:"Yuba wis sin", desc:"Agellid n tussna deg Numidya d Muritanya, yettwassnen s tira-ines ɣef tmurt, umezruy d tfawt." },
+      { era:"yemmut 686", name:"Agellid Aksil", desc:"Agellid amazigh, yettwassnen daɣen s yisem Kusayla, i geǧǧujden i tuffɣa n Umawiyen ɣer Tmazɣa." },
+      { era:"yemmut ~703", name:"Tagellidt Tihya", desc:"Tagellidt d tamɣart n umenɣi n Imazighen i gekemlen amenɣi seld Aksil, tuɣal d yiwet seg tewsatin ipwassnen n wakud-nni." }
+    ],
+    figures: [
+      { field:"Tabburt", name:"Sidi Ugustin", years:"354 – 430", desc:"Aneflus n Hippona n uẓaṛ amazigh, yiwen seg imusnawen ittwassnen ugar deg umezruy amasiḥi." },
+      { field:"Babapa", name:"Papa Sidi Viktor amezwaru", years:"yemmut 199", desc:"Papa amezwaru n uẓaṛ afriqi, yettwassnen s tuduft n tutlayt talatinit ɣer tẓallit n Tjmaɛt." },
+      { field:"Babapa", name:"Papa Sidi Miltiyad", years:"yemmut 314", desc:"Papa n uẓaṛ afriqi, deg lweqt-ines i geksed umasiḥiyen aqbul ussligen deg Ṛuma." },
+      { field:"Babapa", name:"Papa Sidi Jilazyus amezwaru", years:"yemmut 496", desc:"Papa n uẓaṛ amazigh, yettwassnen s tira-ines ɣef umyaway gar tsertit d ddin." },
+      { field:"Tira", name:"Abulay", years:"~124 – ~170", desc:"Amaru n uẓaṛ numidi, bab n tira 'Aɣyul awraɣ', yiwet seg tirawin timezwura i d-yeqqimen s telqem." },
+      { field:"Tussna", name:"Lmuxtar Susi", years:"1900 – 1963", desc:"Amusnaw amazigh amerruki, yura ɣef umezruy d tmetti n tmurt n Sus." },
+      { field:"Taḥenna n uḍar", name:"Zinedine Zidane", years:"1972 –", desc:"Yerbeḥ Taku n Ddunit, ass-a d yiwen seg wudmawen yettwassnen n Imazighen s ubrid." },
+      { field:"Taḥenna n uḍar", name:"Karim Benzema", years:"1987 –", desc:"Anagraw n taḥenna n uḍar, yerbeḥ Ballon d'Or, yiwen seg yimeḍebbren ugar n twenza-ines." },
+      { field:"Taḥenna n uḍar", name:"Mustapha Hadji", years:"1971 –", desc:"Amrezzu amerruki, yettwaxtar d aḥeddad amezwaru n Tefriqt deg 1998." },
+      { field:"Taḥenna n uḍar", name:"Brahim Diaz", years:"1999 –", desc:"Anagraw n Real Madrid akked tarbaɛt n Lmerruk." },
+      { field:"Taḥenna n uḍar", name:"Lamine Yamal", years:"2007 –", desc:"Anagraw n Barcelona akked Sbanya, yettwassen d yiwen seg imesli imecṭaḥ ugar n twenza-ines." }
+    ]
+  }
+};
+
+const langs = document.getElementById('langs');
+const timelineEl = document.getElementById('timeline');
+const figuresEl = document.getElementById('figures');
+
+function render(lang){
+  const c = content[lang];
+  document.documentElement.lang = lang === 'zgh' ? 'en' : lang;
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const key = el.getAttribute('data-key');
+    if(c[key]) el.textContent = c[key];
+  });
+  timelineEl.innerHTML = c.people.map(p => `
+    <div class="item">
+      <div class="node">${p.name.trim().charAt(0)}</div>
+      <div class="era">${p.era}</div>
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+    </div>
+  `).join('');
+  figuresEl.innerHTML = c.figures.map(f => `
+    <div class="figure-card">
+      <div class="badge">${f.name.trim().charAt(0)}</div>
+      <div class="field">${f.field}</div>
+      <h3>${f.name}</h3>
+      <div class="years">${f.years}</div>
+      <p>${f.desc}</p>
+    </div>
+  `).join('');
+  langs.querySelectorAll('button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+langs.querySelectorAll('button').forEach(btn=>{
+  btn.addEventListener('click', ()=> render(btn.dataset.lang));
+});
+
+render('en');
+</script>
+
+</body>
+</html>
